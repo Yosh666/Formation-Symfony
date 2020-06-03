@@ -7,13 +7,18 @@
 
     <table class="table">
         <tbody>
+            
             <tr>
-                <th>Id</th>
-                <td>{{ blocmodule.id }}</td>
+                <th>Nom</th>
+                <td>{{ blocmodule.name }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ blocmodule.name }}</td>
+                <th>
+                    Catégorie                    
+                </th>
+                <td>
+                    {{ blocmodule.categories.name}}
+                </td>
             </tr>
         </tbody>
     </table>

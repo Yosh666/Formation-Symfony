@@ -8,16 +8,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Name</th>
+                <th>Catégorie</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for blocmodule in blocmodules %}
             <tr>
-                <td>{{ blocmodule.id }}</td>
+               
                 <td>{{ blocmodule.name }}</td>
+                <td> {{ blocmodule.categories.name}}</td>
                 <td>
                     <a href="{{ path('blocmodule_show', {'id': blocmodule.id}) }}">show</a>
                     <a href="{{ path('blocmodule_edit', {'id': blocmodule.id}) }}">edit</a>

@@ -2,39 +2,54 @@
 
 namespace App\Form;
 
-use App\Entity\Programme;
 use App\Entity\Session;
+use App\Entity\Programme;
 use App\Entity\Stagiaire;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\ProgrammeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
 
 class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('started_at')
-            ->add('ended_at')
-            ->add('nb_seat')
+            ->add('title',TextType::class,[
+                'label'=>'Nom de la formation'
+            ])
+            ->add('started_at',DateType::class,[
+                'label'=>'Démarré le',
+                'format'=>'dd-MM-yyyy',
+                'years'=>range(date('Y')-2,date('Y')+5)
+
+            ])
+            ->add('ended_at',DateType::class,[
+                'label'=>'fini le',
+                'format'=>'dd-MM-yyyy',
+                'years'=>range(date('Y')-2,date('Y')+5)
+
+            ])
+            ->add('nb_seat',IntegerType::class)
             ->add('stagiaires',EntityType::class,[
                 'class'=>Stagiaire::class,
                 'choice_label'=>function(Stagiaire $stagiaire){
                     return $stagiaire->getName().' '.$stagiaire->getFirstname();
                 },
+                "expanded"=>true,
                 'multiple'=>true,
                 "required"=>false
             ])
+            
             //FIXME
-            /*->add('programmes',EntityType::class,[
-                'class'=>Programme::class,
-                'choice_label'=>function(Programme $programme){
-                    return $programme->getBlocmodulesName();
-                },
-                'multiple'=>true,
-                "required"=>false
+            /*->add('programmes',CollectionType::class,[
+                'entry_type'=>ProgrammeType::class          
+               
             ])*/
             /*BUG
             et si on passait par une page spéciale pr le programme de chaque session de formation 

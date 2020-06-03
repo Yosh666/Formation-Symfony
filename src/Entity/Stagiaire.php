@@ -6,6 +6,7 @@ use App\Repository\StagiaireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StagiaireRepository::class)
@@ -36,6 +37,9 @@ class Stagiaire
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message = "L\'email '{{ value }}' n\'existe pas!"
+     *  )
      */
     private $mail;
 

@@ -7,9 +7,26 @@
     </head>
     <body>
         {% block nav %}
-        
-            <a href="{{ path('home')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Accueil</a>
-        
+            <ul style="display: flex;justify-content: space-between;">
+                <li>
+                    <a href="{{ path('home')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Accueil</a>
+                </li>
+                <li>
+                    <a href="{{ path('stagiaire_index')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Stagiaires</a>
+                </li>
+                <li>
+                    <a href="{{ path('session_index')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Sessions</a>
+                </li>
+                <li>
+                    <a href="{{ path('blocmodule_index')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Modules</a>
+                </li>
+                <li>
+                    <a href="{{ path('categorie_index')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Catégories</a>
+                </li>
+                <li>
+                    <a href="{{ path('programme_index')}} " style="padding:1em;background-color:#BA347E;color:#BBBBBB;border:1px solid black; " >Faire le programme du cours</a>
+                </li>
+            </ul>
         {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}

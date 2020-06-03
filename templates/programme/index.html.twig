@@ -8,21 +8,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Session</th>
+                <th>module</th>
                 <th>Duree</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for programme in programmes %}
-            <tr>
-                <td>{{ programme.id }}</td>
-                <td>{{ programme.duree }}</td>
-                <td>
-                    <a href="{{ path('programme_show', {'id': programme.id}) }}">show</a>
-                    <a href="{{ path('programme_edit', {'id': programme.id}) }}">edit</a>
-                </td>
-            </tr>
+            
+                {#{% for session in sessions %}#}
+                    <tr>
+                        <td>{{programme.sessions.title}} </td>
+                        <td>{{programme.blocmodules.name}}</td>
+                        <td>{{ programme.duree }}</td>
+                        <td>
+                            <a href="{{ path('programme_show', {'id': programme.id}) }}">show</a>
+                            <a href="{{ path('programme_edit', {'id': programme.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {#{% endfor %}#}
+                
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>

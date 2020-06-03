@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Form;
-
+use App\Entity\Session;
+use App\Entity\Blocmodule;
 use App\Entity\Programme;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,9 +16,29 @@ class ProgrammeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('duree')
-            ->add('blocmodules')
-            ->add('sessions')
+            ->add('duree',IntegerType::class,[
+                'label'=>"durée en jours"
+            ])
+            ->add('blocmodules',EntityType::class,[
+                'class'=>Blocmodule::class,
+                'label'=>'module',
+                'choice_label'=>function(Blocmodule $module){
+                    return $module->getName();
+                },
+                
+                'expanded'=>true,
+                'multiple'=>false,
+                'required'=>true
+            ])
+            /*->add('sessions',EntityType::class,[
+                'class'=>Session::class,
+                'choice_label'=>function(Session $session){
+                    return $session->getTitle();
+                },
+                'expanded'=>true,
+                'multiple'=>false,
+                'required'=>true
+            ])*/
         ;
     }
 

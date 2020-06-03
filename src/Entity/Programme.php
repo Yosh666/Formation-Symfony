@@ -6,6 +6,8 @@ use App\Repository\ProgrammeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Session;
+use App\Entity\Blocmodule;
 
 /**
  * @ORM\Entity(repositoryClass=ProgrammeRepository::class)
@@ -67,7 +69,7 @@ class Programme
 
     //FIXME
     /*public function getBlocmodulesName(){
-        return $this->blocmodules->getName();
+        return $this->getBlocmodules()->getName();
     }*/
 
     public function addBlocmodule(Blocmodule $blocmodule): self
