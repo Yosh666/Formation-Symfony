@@ -27,20 +27,20 @@ class Programme
     private $duree;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Blocmodule::class, inversedBy="programmes")
+     * @ORM\ManyToOne(targetEntity=Blocmodule::class, inversedBy="programmes")
      */
-    private $blocmodules;
+    private $blocmodule;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Session::class, inversedBy="programmes")
+     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="programmes")
      */
-    private $sessions;
+    private $session;
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->blocmodules = new ArrayCollection();
         $this->sessions = new ArrayCollection();
-    }
+    }*/
 
     public function getId(): ?int
     {
@@ -59,60 +59,29 @@ class Programme
         return $this;
     }
 
-    /**
-     * @return Collection|Blocmodule[]
-     */
-    public function getBlocmodules(): Collection
+    public function getBlocmodule(): ?Blocmodule
     {
-        return $this->blocmodules;
+        return $this->blocmodule;
     }
 
-    //FIXME
-    /*public function getBlocmodulesName(){
-        return $this->getBlocmodules()->getName();
-    }*/
-
-    public function addBlocmodule(Blocmodule $blocmodule): self
+    public function setBlocmodule(?Blocmodule $blocmodule): self
     {
-        if (!$this->blocmodules->contains($blocmodule)) {
-            $this->blocmodules[] = $blocmodule;
-        }
+        $this->blocmodule = $blocmodule;
 
         return $this;
     }
 
-    public function removeBlocmodule(Blocmodule $blocmodule): self
+    public function getSession(): ?Session
     {
-        if ($this->blocmodules->contains($blocmodule)) {
-            $this->blocmodules->removeElement($blocmodule);
-        }
+        return $this->session;
+    }
+
+    public function setSession(?Session $session): self
+    {
+        $this->session = $session;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Session[]
-     */
-    public function getSessions(): Collection
-    {
-        return $this->sessions;
-    }
-
-    public function addSession(Session $session): self
-    {
-        if (!$this->sessions->contains($session)) {
-            $this->sessions[] = $session;
-        }
-
-        return $this;
-    }
-
-    public function removeSession(Session $session): self
-    {
-        if ($this->sessions->contains($session)) {
-            $this->sessions->removeElement($session);
-        }
-
-        return $this;
-    }
+    
 }

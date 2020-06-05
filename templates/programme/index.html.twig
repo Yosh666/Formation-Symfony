@@ -5,37 +5,27 @@
 {% block body %}
     <h1>Programme index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Session</th>
-                <th>module</th>
-                <th>Duree</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    
         {% for programme in programmes %}
             
-                {#{% for session in sessions %}#}
-                    <tr>
-                        <td>{{programme.sessions.title}} </td>
-                        <td>{{programme.blocmodules.name}}</td>
-                        <td>{{ programme.duree }}</td>
-                        <td>
-                            <a href="{{ path('programme_show', {'id': programme.id}) }}">show</a>
-                            <a href="{{ path('programme_edit', {'id': programme.id}) }}">edit</a>
-                        </td>
-                    </tr>
-                {#{% endfor %}#}
                 
+                     
+            <div>
+                <h1> la formation:{{programme.session.title}}</h1>
+                <p>{{programme.blocmodule.name}} sur  {{ programme.duree }} jours </p>
+                <button>
+                    <a href="{{ path('programme_show', {'id': programme.id}) }}">show</a>
+                </button>
+                <button>
+                    <a href="{{ path('programme_edit', {'id': programme.id}) }}">edit</a>
+                </button>
+            </div>   
+                                                    
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+            <p>no records found</p>
+            
         {% endfor %}
-        </tbody>
-    </table>
+        
 
     <a href="{{ path('programme_new') }}">Create new</a>
 {% endblock %}

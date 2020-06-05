@@ -30,15 +30,16 @@ class ProgrammeType extends AbstractType
                 'multiple'=>false,
                 'required'=>true
             ])
-            /*->add('sessions',EntityType::class,[
+            ->add('sessions',EntityType::class,[
                 'class'=>Session::class,
+                'label'=>'Dans la formation',
                 'choice_label'=>function(Session $session){
                     return $session->getTitle();
                 },
                 'expanded'=>true,
                 'multiple'=>false,
                 'required'=>true
-            ])*/
+            ])
         ;
     }
 

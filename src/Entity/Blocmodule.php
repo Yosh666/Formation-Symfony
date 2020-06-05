@@ -31,7 +31,7 @@ class Blocmodule
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Programme::class, mappedBy="blocmodules")
+     * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="blocmodule")
      */
     private $programmes;
 

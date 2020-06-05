@@ -41,6 +41,7 @@ class SessionType extends AbstractType
                 'choice_label'=>function(Stagiaire $stagiaire){
                     return $stagiaire->getName().' '.$stagiaire->getFirstname();
                 },
+                
                 "expanded"=>true,
                 'multiple'=>true,
                 "required"=>false

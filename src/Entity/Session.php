@@ -45,7 +45,7 @@ class Session
     private $stagiaires;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Programme::class, mappedBy="sessions")
+     * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="session",orphanRemoval=true)
      */
     private $programmes;
 
