@@ -38,25 +38,17 @@ class SessionType extends AbstractType
             ->add('nb_seat',IntegerType::class)
             ->add('stagiaires',EntityType::class,[
                 'class'=>Stagiaire::class,
-                'choice_label'=>function(Stagiaire $stagiaire){
+                'choice_label'=>function(Stagiaire $stagiaire)
+                {
                     return $stagiaire->getName().' '.$stagiaire->getFirstname();
                 },
                 
                 "expanded"=>true,
                 'multiple'=>true,
-                "required"=>false
-            ])
-            
-            //FIXME
-            /*->add('programmes',CollectionType::class,[
-                'entry_type'=>ProgrammeType::class          
-               
-            ])*/
-            /*BUG
-            et si on passait par une page spéciale pr le programme de chaque session de formation 
-            penser make:crud programme*/
-        ;
-    }
+                "required"=>false,
+                "by_reference"=>false
+            ]);
+   }
 
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -64,9 +64,24 @@ class StagiaireController extends AbstractController
     public function edit(Request $request, Stagiaire $stagiaire): Response
     {
         $form = $this->createForm(StagiaireType::class, $stagiaire);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           
+            foreach($form->get("sessions")->getData() as $session){
+                              
+                if($session->getPlacesOccupees() >= $session->getNbSeat()){
+                    dd("pu de place !");
+                }
+            } 
+            dd("fini");
+            /*
+            if(count($form->get("sessions")->getData()) > $form->get("nb_seat")->getData())
+            {
+                $this->addFlash("error","vous avez inscrit trop de stagiaires");
+                return $this->redirectToRoute('session_edit', ['id' => $stagiaire->getId()]);
+            }*/
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('stagiaire_index');

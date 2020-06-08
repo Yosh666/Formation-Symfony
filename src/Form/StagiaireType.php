@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Session;
 use App\Entity\Stagiaire;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -37,7 +40,13 @@ class StagiaireType extends AbstractType
                     'minlength'=>6
                 ]
             ])
-            ->add('sessions')
+            ->add('sessions',EntityType::class,[
+                'class'=>Session::class,
+                
+                'expanded'=>true,
+                'multiple'=>true,
+                'required'=>false
+            ])
         ;
     }
 

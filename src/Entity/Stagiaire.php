@@ -49,7 +49,8 @@ class Stagiaire
     private $phone;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Session::class, mappedBy="stagiaires")
+     * @ORM\ManyToMany(targetEntity=Session::class, inversedBy="stagiaires")
+     * @ORM\JoinTable(name="stagiaire_session")
      */
     private $sessions;
 
@@ -85,6 +86,10 @@ class Stagiaire
         $this->firstname = $firstname;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->getName()." ".$this->getFirstname();
     }
 
     public function getBirthday(): ?\DateTimeInterface

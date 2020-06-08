@@ -40,7 +40,7 @@ class Session
     private $nb_seat;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Stagiaire::class, inversedBy="sessions")
+     * @ORM\ManyToMany(targetEntity=Stagiaire::class, mappedBy="sessions")
      */
     private $stagiaires;
 
@@ -116,10 +116,15 @@ class Session
         return $this->stagiaires;
     }
 
+    public function getPlacesOccupees(){
+        return count($this->getStagiaires());
+    }
+
     public function addStagiaire(stagiaire $stagiaire): self
     {
         if (!$this->stagiaires->contains($stagiaire)) {
             $this->stagiaires[] = $stagiaire;
+            $stagiaire->addSession($this);
         }
 
         return $this;
@@ -129,6 +134,7 @@ class Session
     {
         if ($this->stagiaires->contains($stagiaire)) {
             $this->stagiaires->removeElement($stagiaire);
+            $stagiaire->removeSession($this);
         }
 
         return $this;
@@ -160,5 +166,9 @@ class Session
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

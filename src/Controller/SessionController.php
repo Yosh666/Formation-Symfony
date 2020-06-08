@@ -64,12 +64,19 @@ class SessionController extends AbstractController
     public function edit(Request $request, Session $session): Response
     {
         $form = $this->createForm(SessionType::class, $session);
+       
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if(count($form->get("stagiaires")->getData()) > $form->get("nb_seat")->getData()){
+                $this->addFlash("error","vous avez inscrit trop de stagiaires");
+                return $this->redirectToRoute('session_edit', ['id' => $session->getId()]);
+            }
+            
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success","Bravo t'as modifié un truc \o/");
             return $this->redirectToRoute('session_index');
+
         }
 
         return $this->render('session/edit.html.twig', [

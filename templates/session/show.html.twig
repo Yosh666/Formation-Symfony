@@ -33,9 +33,21 @@
     {% else %}
         <p>Le programme n'a pas encore été créé il faut aller <a href="{{path('programme_new')}} ">ici</a></p>  
     {% endfor %}
-    <a href="{{ path('session_index') }}">Retour à la liste</a>
+    <p>Liste des stagiaires:</p>
+    <ul>
+    {% for stagiaire in session.stagiaires %}
+        
+            <li>
+                {{stagiaire.name}} {{stagiaire.firstname}}
+            </li>
+    {% else %}
+        <p>Pas encore de stagiaires inscrits sur cette formation</p>
+        
+    {% endfor %}
+    </ul>
+    <p><a href="{{ path('session_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('session_edit', {'id': session.id}) }}">Editer</a>
+    <p><a href="{{ path('session_edit', {'id': session.id}) }}">Editer</a></p>
 
     {{ include('session/_delete_form.html.twig') }}
 {% endblock %}
