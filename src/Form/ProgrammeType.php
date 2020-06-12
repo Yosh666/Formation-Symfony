@@ -19,7 +19,7 @@ class ProgrammeType extends AbstractType
             ->add('duree',IntegerType::class,[
                 'label'=>"durée en jours"
             ])
-            ->add('blocmodules',EntityType::class,[
+            ->add('blocmodule',EntityType::class,[
                 'class'=>Blocmodule::class,
                 'label'=>'module',
                 'choice_label'=>function(Blocmodule $module){
@@ -30,7 +30,7 @@ class ProgrammeType extends AbstractType
                 'multiple'=>false,
                 'required'=>true
             ])
-            ->add('sessions',EntityType::class,[
+            /*->add('session',EntityType::class,[
                 'class'=>Session::class,
                 'label'=>'Dans la formation',
                 'choice_label'=>function(Session $session){
@@ -39,7 +39,7 @@ class ProgrammeType extends AbstractType
                 'expanded'=>true,
                 'multiple'=>false,
                 'required'=>true
-            ])
+            ])*/
         ;
     }
 

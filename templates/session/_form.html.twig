@@ -1,13 +1,13 @@
 {{ form_start(form) }}
     <div> {{form_row(form.title)}} </div>
-    <div> {{form_row(form.startedAt)}} </div>
-    <div> {{form_row(form.endedAt)}} </div>
-    <div> {{form_row(form.nbSeat)}} </div>
+    <div> {{form_row(form.started_at)}} </div>
+    <div> {{form_row(form.ended_at)}} </div>
+    <div> {{form_row(form.nb_seat)}} </div>
     <div> {{form_row(form.stagiaires)}} </div>
     {#TODO
         voir uikit pr mettre en page un form moins moche
         #}
-    {#COL 
+    {#COL twig
         c'est ici qu'on va s'occuper de programmes #}
     <div id="programmes"
 
@@ -19,7 +19,7 @@
 
         {#un compteur permettant de mettre un id unique à chag form 
         sans ça on ne rentre pas de nouvelle donnée forcément si deux form ont la meme id....
-        le plus simple mesurer la longueur#}
+        le plus simple mesurer la longueur mais en vrai il est chiant on va pas l'utiliser #}
         data-widget-counter= "{{ form.programmes|length}} "
     > {# <=et oui tout ça était dans la div #}
             {% for programme in form.programmes %}
@@ -31,7 +31,7 @@
             {% endfor %}
 
             {#Le bouton JS qui permettra d'ajouter un nouveau ProgrammeType à la collection #}
-            <button id="addButton">Ajouter un programme</button>
+            <button id='addButton'>Ajouter un programme</button>
     </div>
 
 
@@ -40,7 +40,5 @@
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 
-{#ASK 
-    comme c un form include est ce qu'on peut mettre le JS ici?#}
 
 

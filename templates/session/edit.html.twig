@@ -11,3 +11,7 @@
 
     {{ include('session/_delete_form.html.twig') }}
 {% endblock %}
+{% block javascripts %}
+{{ parent ()}}
+<script src="{{asset('js/CollectionProg.js')}}"></script>
+{% endblock %}

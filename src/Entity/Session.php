@@ -157,7 +157,7 @@ by_reference false dans le sessionType*/
     {
         if (!$this->programmes->contains($programme)) {
             $this->programmes[] = $programme;
-            $programme->addSession($this);
+            $programme->setSession($this);
         }
 
         return $this;
@@ -167,7 +167,7 @@ by_reference false dans le sessionType*/
     {
         if ($this->programmes->contains($programme)) {
             $this->programmes->removeElement($programme);
-            $programme->removeSession($this);
+            $programme->setSession($this);
         }
 
         return $this;
