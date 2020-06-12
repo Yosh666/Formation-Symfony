@@ -24,7 +24,8 @@ class SessionController extends AbstractController
             'sessions' => $sessionRepository->findAll(),
         ]);
     }
-
+//TODO mettre edit et new dans la même fonction
+//COL l'avantage des deux routes dans la meme fonction c aussi plus simple pr le twig à afficher
     /**
      * @Route("/new", name="session_new", methods={"GET","POST"})
      */

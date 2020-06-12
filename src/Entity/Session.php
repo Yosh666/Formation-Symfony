@@ -44,8 +44,11 @@ class Session
      */
     private $stagiaires;
 
+    
+    //COL cascade persist pr mettre plusieurs programmes à persister dans le formulaire pour pouvoir le flusher
     /**
-     * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="session",orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="session",orphanRemoval=true, cascade={"persist"})
+     * 
      */
     private $programmes;
 
@@ -147,7 +150,9 @@ class Session
     {
         return $this->programmes;
     }
-
+/*COL
+comme on peut le voir on n'a pas de setProgramme c pr ça kon doit fr un
+by_reference false dans le sessionType*/
     public function addProgramme(Programme $programme): self
     {
         if (!$this->programmes->contains($programme)) {
