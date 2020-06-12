@@ -31,16 +31,7 @@ class ProgrammeType extends AbstractType
             ->add('duree',IntegerType::class,[
                 'label'=>"durée en jours"
             ])
-            /*->add('session',EntityType::class,[
-                'class'=>Session::class,
-                'label'=>'Dans la formation',
-                'choice_label'=>function(Session $session){
-                    return $session->getTitle();
-                },
-                'expanded'=>true,
-                'multiple'=>false,
-                'required'=>true
-            ])*/
+            
         ;
     }
 

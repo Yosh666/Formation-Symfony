@@ -67,8 +67,7 @@ class SessionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if(count($form->get("stagiaires")->getData()) > $form->get("nb_seat")->getData()){
-                $this->addFlash("error","vous avez inscrit trop de stagiaires");
+           
                 return $this->redirectToRoute('session_edit', ['id' => $session->getId()]);
             }
             
