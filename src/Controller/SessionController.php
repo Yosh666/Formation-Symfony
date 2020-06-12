@@ -27,9 +27,10 @@ class SessionController extends AbstractController
 //TODO mettre edit et new dans la même fonction
 //COL l'avantage des deux routes dans la meme fonction c aussi plus simple pr le twig à afficher
     /**
-     * @Route("/new", name="session_new", methods={"GET","POST"})
+     * 
      */
-    public function new(Request $request): Response
+    //@Route("/new", name="session_new", methods={"GET","POST"})
+    /*public function new(Request $request): Response
     {
         $session = new Session();
         $form = $this->createForm(SessionType::class, $session);
@@ -47,23 +48,20 @@ class SessionController extends AbstractController
             'session' => $session,
             'form' => $form->createView(),
         ]);
-    }
+    }*/
+
+   
 
     /**
-     * @Route("/{id}", name="session_show", methods={"GET"})
+     * @Route("/new", name="session_new" )
+     * @Route("/{id}/edit", name="session_edit")
+     *
      */
-    public function show(Session $session): Response
+    public function edit( Session $session= null, Request $request): Response
     {
-        return $this->render('session/show.html.twig', [
-            'session' => $session,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="session_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Session $session): Response
-    {
+        if($session == null){
+            $session= new Session();
+        }
         $form = $this->createForm(SessionType::class, $session);
        
         $form->handleRequest($request);
@@ -74,7 +72,9 @@ class SessionController extends AbstractController
                 return $this->redirectToRoute('session_edit', ['id' => $session->getId()]);
             }
             
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($session);
+            $entityManager->flush();
             $this->addFlash("success","Bravo t'as modifié un truc \o/");
             return $this->redirectToRoute('session_index');
 
@@ -82,7 +82,7 @@ class SessionController extends AbstractController
 
         return $this->render('session/edit.html.twig', [
             'session' => $session,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -98,5 +98,14 @@ class SessionController extends AbstractController
         }
 
         return $this->redirectToRoute('session_index');
+    }
+     /**
+     * @Route("/{id}", name="session_show", methods={"GET"})     * 
+     */
+    public function show(Session $session): Response
+    {
+        return $this->render('session/show.html.twig', [
+            'session' => $session,
+        ]);
     }
 }

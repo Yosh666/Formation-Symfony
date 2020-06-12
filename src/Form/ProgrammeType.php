@@ -16,9 +16,7 @@ class ProgrammeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('duree',IntegerType::class,[
-                'label'=>"durée en jours"
-            ])
+            
             ->add('blocmodule',EntityType::class,[
                 'class'=>Blocmodule::class,
                 'label'=>'module',
@@ -29,6 +27,9 @@ class ProgrammeType extends AbstractType
                 'expanded'=>true,
                 'multiple'=>false,
                 'required'=>true
+            ])
+            ->add('duree',IntegerType::class,[
+                'label'=>"durée en jours"
             ])
             /*->add('session',EntityType::class,[
                 'class'=>Session::class,
