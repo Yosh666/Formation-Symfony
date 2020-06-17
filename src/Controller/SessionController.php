@@ -24,50 +24,30 @@ class SessionController extends AbstractController
             'sessions' => $sessionRepository->findAll(),
         ]);
     }
-//TODO mettre edit et new dans la même fonction
-//COL l'avantage des deux routes dans la meme fonction c aussi plus simple pr le twig à afficher
-    /**
-     * 
-     */
-    //@Route("/new", name="session_new", methods={"GET","POST"})
-    /*public function new(Request $request): Response
-    {
-        $session = new Session();
-        $form = $this->createForm(SessionType::class, $session);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($session);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('session_index');
-        }
-
-        return $this->render('session/new.html.twig', [
-            'session' => $session,
-            'form' => $form->createView(),
-        ]);
-    }*/
 
    
 
     /**
      * @Route("/new", name="session_new" )
      * @Route("/{id}/edit", name="session_edit")
-     *
      */
     public function edit( Session $session= null, Request $request): Response
     {
         if($session == null){
             $session= new Session();
+            $mode = "new";
+        }
+        else{
+            $mode = "edit";
         }
         $form = $this->createForm(SessionType::class, $session);
        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           
+            if(count($form->get("stagiaires")->getData()) > $form->get("nb_seat")->getData()){
+                $this->addFlash("error","vous avez inscrit trop de stagiaires");
                 return $this->redirectToRoute('session_edit', ['id' => $session->getId()]);
             }
             
@@ -81,12 +61,13 @@ class SessionController extends AbstractController
 
         return $this->render('session/edit.html.twig', [
             'session' => $session,
-            'form' => $form->createView()
+            'form'    => $form->createView(),
+            'mode'    => $mode
         ]);
     }
 
     /**
-     * @Route("/{id}", name="session_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="session_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Session $session): Response
     {
